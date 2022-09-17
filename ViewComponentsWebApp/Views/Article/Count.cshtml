@@ -1,0 +1,50 @@
+﻿@model ViewComponentsWebApp.Models.CommentsViewModel
+@*@model ViewComponentsWebApp.Models.CommentsViewModel
+
+
+<form method="post">
+    <!-- hidden input of the current click count -->
+    <h4 class="mb-5" style="color:blue">Comment Count: @TempData["CommentCount"]</h4>
+    @Html.HiddenFor(m => m.CommentCount)
+    <fieldset>
+        <legend>Button clicks counter</legend>
+        <div>
+            @Html.LabelFor(m => m.CommentCount)
+            <h2>@Model.CommentCount</h2>
+        </div>
+        <div>
+            <button type="submit">Submit!</button>
+        </div>
+    </fieldset>
+</form>
+*@
+
+@{
+    ViewData["Title"] = "Count";
+}
+
+<h1>Count</h1>
+<form method="post" asp-controller="Article" asp-action="Index">
+    <div>
+        @*<a  asp-action="Count" class="button-home" href="Content" target="_blank">Get Count</a>*@
+        <button type="submit" class="button-home" value="count" name="count" asp-action="Count">Post</button><label id="demo"></label>
+    </div>
+
+
+</form>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+<script>
+        let buttonHome = document.querySelector(".button-home");
+    let CountClicks=0;
+
+    buttonHome.addEventListener("click",function(){
+        CountClicks += 1;
+        document.getElementById('demo').innerHTML = "No Of Clicks :"+ CountClicks;
+        console.log(CountClicks)
+    }
+</script>
+}
+

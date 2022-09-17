@@ -1,0 +1,41 @@
+﻿
+@using Newtonsoft.Json
+@model ViewComponentsWebApp.Models.CommentsViewModel
+@{
+
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <h2>
+        <p><u>View Compontes Form</u></p>
+        
+    </h2>
+</div>
+<div class="row mt-5">
+    <div class="col-lg-8 col-md-10 mx-auto">
+<form asp-controller="Article" asp-action="Index" method="post">
+    <div class="form-group">
+        <h6 class="mb-5">Comments Count: @TempData["CommentCount"]</h6>
+        <h6 class="mb-5">Content: @TempData["Content"] </h6>
+    </div>
+    <div class="form-group">
+        <label id="lblName" hidden name=c3>@TempData["CommentCount"]</label>
+        <input type="hidden" id="hfName" name="ClicksCount" />
+         <textarea asp-for="Content" class="form-control" rows="3" style="width:500px"></textarea>
+    </div>
+    
+    <button type="submit" onclick="OnSubmit()" class="btn btn-primary" value="count" name="count" asp-action="Count" style="margin-top:20px">Post</button>
+</form>
+</div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        function OnSubmit() {
+            document.getElementById("hfName").value = document.getElementById("lblName").innerHTML;
+        }
+    </script>
+}
+
